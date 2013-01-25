@@ -12,6 +12,11 @@
 	<version>3.4.0-SNAPSHOT</version>
 	<name>vpe.all</name>
 	<packaging>pom</packaging>
+
+        <properties>
+                <tycho.scmUrl>scm:git:git://github.com/jbosstools/jbosstools-vpe</tycho.scmUrl>
+        </properties>
+
 	<modules>
 		<module>plugins</module>
 		<module>tests</module>
