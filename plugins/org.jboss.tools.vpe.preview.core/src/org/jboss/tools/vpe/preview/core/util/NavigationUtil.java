@@ -109,10 +109,15 @@ public final class NavigationUtil {
 		} else {
 			stringToEvaluate = "return document.elementFromPoint(" + x + ", " + y + ").outerHTML;"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
+
 		Object result = browser.evaluate(stringToEvaluate);
 		if (result instanceof String) {
 			String selectedElementId = TransformUtil.getSelectedElementId(result.toString(), "(?<=data-vpvid=\").*?(?=\")"); //$NON-NLS-1$
-			if (selectedElementId!=null) {
+			if (selectedElementId!=null && !selectedElementId.isEmpty()) {
+
+				Long id = (selectedElementId != null && !selectedElementId.isEmpty()) //avoiding NumberFormatException
+						  ? Long.parseLong(selectedElementId)
+						  : null;				
 				NavigationUtil.outlineSelectedElement(browser,Long.parseLong(selectedElementId));
 
 				String fileExtension = EditorUtil.getFileExtensionFromEditor(currentEditor);

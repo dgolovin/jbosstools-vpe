@@ -20,6 +20,7 @@ public class Messages extends NLS {
 
 	public static String UsageEventTypePreviewLabelDescription;
 	public static String BrowserErrorWrapper_NO_ENGINE_ERROR;
+	public static String VISUAL_PREVIEW;
 
 	static {
 		NLS.initializeMessages(BUNDLE_NAME,

@@ -26,6 +26,7 @@ public class VpvPreview extends VpvEditor {
 			if (editorLoadWindowListener != null) {
 				editorLoadWindowListener.load();
 			}
+			inizializeEditorListener();
 		} catch (Throwable t) {
 			//cannot create browser. show error message then
 			errorWrapper.showError(parent, t);

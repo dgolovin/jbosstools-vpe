@@ -21,6 +21,8 @@ public final class VpeUIMessages extends NLS {
 	}
 	private VpeUIMessages(){}
 
+	public static String VISUAL_EDITOR;
+	
 	public static String ATTRIBUTES_MENU_ITEM;
 	public static String SELECT_THIS_TAG_MENU_ITEM;
 	public static String STRIP_TAG_MENU_ITEM;

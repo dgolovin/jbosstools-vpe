@@ -11,6 +11,7 @@ public class Messages extends NLS {
 	public static String MOZILLA_LOADING_ERROR_LINK;
 	public static String GTK3_IS_NOT_SUPPORTED;
 	public static String CURRENT_PLATFORM_IS_NOT_SUPPORTED;
+	public static String CANNOT_SHOW_EXTERNAL_FILE;
 	
 	static {
 		// initialize resource bundle

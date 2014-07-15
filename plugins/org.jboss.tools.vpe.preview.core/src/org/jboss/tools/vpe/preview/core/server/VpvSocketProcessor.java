@@ -281,7 +281,9 @@ public class VpvSocketProcessor implements Runnable {
             Activator.logError(e);
         } finally {
             try {
-                fileInputStream.close();
+            	if (fileInputStream != null) {
+            		fileInputStream.close();
+            	}
             } catch (IOException e) {
                 Activator.logError(e);
             }
