@@ -45,10 +45,6 @@ public class VpvVisualModelHolderRegistry {
 	}
 	
 	public VpvVisualModelHolder getHolderById(Integer id) {
-		if (id == null) {
-			return null;
-		} else {
-			return visualModelHolderRegistry.get(id);
-		}
+		return visualModelHolderRegistry.get(id);
 	}
 }

@@ -27,13 +27,13 @@ public enum SuitableFileExtensions {
 		this.value = value;
 	}
 
-	public String getValue() {
-		return value;
+	public boolean equals(String text) {
+		return value.equals(text);
 	}
 
 	public static boolean contains(String fileExtension) {
 		for (SuitableFileExtensions extension : SuitableFileExtensions.values()) {
-			if (extension.value.equals(fileExtension)) {
+			if (extension.equals(fileExtension)) {
 				return true;
 			}
 		}
@@ -41,17 +41,11 @@ public enum SuitableFileExtensions {
 	}
 
 	public static boolean isCssOrJs(String fileExtension) {
-		if (JS.getValue().equals(fileExtension) || CSS.getValue().equals(fileExtension)) {
-			return true;
-		}
-		return false;
+		return JS.equals(fileExtension) || CSS.equals(fileExtension);
 	}
 	
 	public static boolean isHTML(String fileExtension) {
-		if (HTML.getValue().equals(fileExtension) || HTM.getValue().equals(fileExtension)) {
-			return true;
-		}
-		return false;
+		return HTML.equals(fileExtension) || HTM.equals(fileExtension);
 	}
 
 }

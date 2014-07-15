@@ -23,6 +23,7 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
@@ -48,14 +49,7 @@ public final class EditorUtil {
 		if (selectedNode != null) {
 			selectionDocument = selectedNode.getOwnerDocument();
 		}
-
-		Document editorDocument = getEditorDomDocument(editor);
-
-		if (selectionDocument != null && selectionDocument == editorDocument) {
-			return true;
-		} else {
-			return false;
-		}
+		return selectionDocument != null && selectionDocument == getEditorDomDocument(editor);
 	}
 
 	public static Node getNodeFromSelection(IStructuredSelection selection) {
@@ -66,24 +60,23 @@ public final class EditorUtil {
 			return null;
 		}
 	}
-	
+
 	public static boolean isImportant(IEditorPart editor) {
-		String fileExtension = getFileExtensionFromEditor(editor);
-		if (editor.getAdapter(StructuredTextEditor.class) != null || SuitableFileExtensions.isCssOrJs(fileExtension)) {
-			return true; // TODO check DOM model support
-		}
-		return false;
+		// TODO check DOM model support
+		return editor.getAdapter(StructuredTextEditor.class) != null 
+				|| SuitableFileExtensions.isCssOrJs(getFileExtensionFromEditor(editor)); 
 	}
-	
+
 	public static IFile getFileOpenedInEditor(IEditorPart editorPart) {
 		IFile file = null;
-		if (editorPart != null && editorPart.getEditorInput() instanceof IFileEditorInput) {
+		IEditorInput fei = editorPart.getEditorInput(); 
+		if (fei instanceof IFileEditorInput) {
 			IFileEditorInput fileEditorInput = (IFileEditorInput) editorPart.getEditorInput();
 			file = fileEditorInput.getFile();
 		}
 		return file;
 	}
-	
+
 	public static String getFileExtensionFromEditor(IEditorPart editor) {
 		String fileExtension = null;
 		IFile file = EditorUtil.getFileOpenedInEditor(editor);
@@ -111,26 +104,19 @@ public final class EditorUtil {
 	}
 
 	private static Document getEditorDomDocument(IEditorPart editor) {
-		IDOMModel editorModel = null;
-		if (editor != null) {
-			editorModel = (IDOMModel) editor.getAdapter(IDOMModel.class);
-		}
-
-		IDOMDocument editorIdomDocument = null;
-		if (editorModel != null) {
-			editorIdomDocument = editorModel.getDocument();
-		}
+		Document editorDocument = null;
+		IDOMModel editorModel = (IDOMModel) editor.getAdapter(IDOMModel.class);
+		IDOMDocument editorIdomDocument = editorModel.getDocument();;
 
 		Element editorDocumentElement = null;
 		if (editorIdomDocument != null) {
 			editorDocumentElement = editorIdomDocument.getDocumentElement();
+
+			if (editorDocumentElement != null) {
+				editorDocument = editorDocumentElement.getOwnerDocument();
+			}
 		}
 
-		Document editorDocument = null;
-		if (editorDocumentElement != null) {
-			editorDocument = editorDocumentElement.getOwnerDocument();
-		}
 		return editorDocument;
 	}
-
 }

@@ -28,10 +28,13 @@ import org.w3c.dom.Node;
  * @author Ilya Buziuk (ibuziuk)
  */
 public class DomUtil {
+	/**
+	 * 
+	 * @param node - 
+	 * @return
+	 */
 	public static Node getParentNode(Node node) {
-		if (node == null) {
-			return null;
-		} else if (node instanceof Attr) {
+		if (node instanceof Attr) {
 			return ((Attr) node).getOwnerElement();
 		} else {
 			return node.getParentNode();

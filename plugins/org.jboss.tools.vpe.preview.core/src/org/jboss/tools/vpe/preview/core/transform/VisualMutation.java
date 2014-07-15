@@ -21,7 +21,6 @@ public class VisualMutation {
 	private Node newParentNode;
 	
 	public VisualMutation(long oldParentId, Node newParentNode) {
-		super();
 		this.oldParentId = oldParentId;
 		this.newParentNode = newParentNode;
 	}

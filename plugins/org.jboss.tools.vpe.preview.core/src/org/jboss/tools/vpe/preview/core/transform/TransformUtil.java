@@ -23,6 +23,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.eclipse.jdt.annotation.Nullable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -67,7 +68,7 @@ public final class TransformUtil {
 
 	public static String getSelectedElementId(String text, String regex) {
 		List<String> allMatches = getAllMatches(text, regex);
-		if (allMatches != null && !allMatches.isEmpty()) {
+		if (!allMatches.isEmpty()) {
 			return allMatches.get(allMatches.size() - 1); // The very last is the biggest one
 		}
 		return null;
