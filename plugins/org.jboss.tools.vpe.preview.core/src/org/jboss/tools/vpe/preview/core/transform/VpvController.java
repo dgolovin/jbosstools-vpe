@@ -58,8 +58,10 @@ public class VpvController {
 		IStructuredModel sourceModel = null;
 		try {
 			requestedFile = ResourcesPlugin.getWorkspace().getRoot().getFile(workspacePath);
-			sourceModel = getSourceModel(requestedFile);
-			visualModel = getVisualModel(sourceModel);
+			if(requestedFile.isAccessible()) {
+				sourceModel = getSourceModel(requestedFile);
+				visualModel = getVisualModel(sourceModel);
+			}
 		} catch (IllegalArgumentException e) {
 			// return 404 Not Found for files like /favicon.ico or for files which have one segment
 			resourceAcceptor.acceptError();
